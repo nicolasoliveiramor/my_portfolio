@@ -5,17 +5,8 @@ declare interface MyProfile {
     description: string
   }[]
   skills: {
-    frontDominances: {
-      id: number
-      technologies: string[]
-    }[]
-    frontKnowledges: {
-      id: number
-      technologies: string[]
-    }[]
-    backKnowledges: {
-      id: number
-      technologies: string[]
-    }[]
-  }
+    id: number
+    title: string
+    technologies: string
+  }[]
 }

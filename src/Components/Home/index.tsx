@@ -7,9 +7,6 @@ import * as S from './styles'
 export const Home = () => {
   const { data, isLoading, error } = useGetProfileQuery()
 
-  const { frontDominances, frontKnowledges, backKnowledges } =
-    (data && data.skills) || {}
-
   if (error) {
     return (
       <h1>
@@ -30,39 +27,29 @@ export const Home = () => {
               <S.HomeApresentation>
                 {data &&
                   data.apresentation.map((item) => (
-                    <div>
+                    <div key={item.id}>
                       <h2>{item.title}</h2>
                       <p>{item.description}</p>
                     </div>
                   ))}
-                <h2>Dominâncias e conhecimentos:</h2>
-                <div>
-                  {frontDominances &&
-                    frontDominances.map((item) => (
-                      <div key={item.id}>
-                        <h4>Domínancias em Front-End:</h4>
-                        <p>{item.technologies.join(', ')}</p>
+                {data &&
+                  data.skills.map((item) => (
+                    <div key={item.id}>
+                      <h2>Dominâncias e conhecimentos:</h2>
+                      <div>
+                        <h4>{item.title}</h4>
+                        <p>{item.technologies}</p>
                       </div>
-                    ))}
-                </div>
-                <div>
-                  {frontKnowledges &&
-                    frontKnowledges.map((item) => (
-                      <div key={item.id}>
-                        <h4>Conhecimentos em Front-End:</h4>
-                        <p>{item.technologies.join(', ')}</p>
+                      <div>
+                        <h4>{item.title}</h4>
+                        <p>{item.technologies}</p>
                       </div>
-                    ))}
-                </div>
-                <div>
-                  {backKnowledges &&
-                    backKnowledges.map((item) => (
-                      <div key={item.id}>
-                        <h4>Conhecimentos em Back-End:</h4>
-                        <p>{item.technologies.join(', ')}</p>
+                      <div>
+                        <h4>C{item.title}</h4>
+                        <p>{item.technologies}</p>
                       </div>
-                    ))}
-                </div>
+                    </div>
+                  ))}
               </S.HomeApresentation>
               <img src={PortfolioImg} alt="Imagem do Pefil" />
             </S.HomeContent>

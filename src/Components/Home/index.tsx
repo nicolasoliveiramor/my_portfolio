@@ -28,7 +28,7 @@ export const Home = () => {
             <S.HomeContent>
               <S.HomeApresentation>
                 {data &&
-                  data.apresentation.map((item) => (
+                  data.presentation.map((item) => (
                     <div key={item.id}>
                       <h2>{item.title}</h2>
                       <p>{item.description}</p>

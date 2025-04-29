@@ -1,5 +1,5 @@
 declare interface MyProfile {
-  apresentation: {
+  presentation: {
     id: number
     title: string
     description: string
@@ -11,5 +11,5 @@ declare interface MyProfile {
       title: string
       technologies: string
     }[]
-  }[]
+  }
 }

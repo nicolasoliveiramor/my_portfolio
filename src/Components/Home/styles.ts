@@ -60,11 +60,8 @@ export const HomeApresentation = styled.div`
     justify-content: center;
     margin-bottom: 0.5rem;
 
-    div {
-
-      h4 {
-        margin-bottom: 0.25rem;
-      }
+    h4 {
+      margin-bottom: 0.15rem;
     }
   }
 `

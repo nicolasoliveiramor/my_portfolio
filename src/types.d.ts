@@ -5,8 +5,11 @@ declare interface MyProfile {
     description: string
   }[]
   skills: {
-    id: number
-    title: string
-    technologies: string
+    sectionTitle: string
+    items: {
+      id: number
+      title: string
+      technologies: string
+    }[]
   }[]
 }

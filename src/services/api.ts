@@ -6,7 +6,7 @@ export const api = createApi({
   }),
   endpoints: (builder) => ({
     getProfile: builder.query<MyProfile, void>({
-      query: () => '/profile'
+      query: () => '/data'
     })
   })
 })

@@ -9,10 +9,12 @@ export const Home = () => {
 
   if (error) {
     return (
-      <h1>
-        Ocorreu um erro ao carregar os dados. Por favor, tente novamente mais
-        tarde.
-      </h1>
+      <div className='container'>
+        <h2>
+          Ocorreu um erro ao carregar os dados. Por favor, tente novamente mais
+          tarde.
+        </h2>
+      </div>
     )
   }
 
@@ -33,21 +35,15 @@ export const Home = () => {
                     </div>
                   ))}
                 {data &&
-                  data.skills.map((item) => (
-                    <div key={item.id}>
-                      <h2>Dominâncias e conhecimentos:</h2>
-                      <div>
-                        <h4>{item.title}</h4>
-                        <p>{item.technologies}</p>
-                      </div>
-                      <div>
-                        <h4>{item.title}</h4>
-                        <p>{item.technologies}</p>
-                      </div>
-                      <div>
-                        <h4>C{item.title}</h4>
-                        <p>{item.technologies}</p>
-                      </div>
+                  data.skills.map((skill) => (
+                    <div>
+                      <h3>{skill.sectionTitle}</h3>
+                      {skill.items.map((item) => (
+                        <div key={item.id}>
+                          <h4>{item.title}</h4>
+                          <p>{item.technologies}</p>
+                        </div>
+                      ))}
                     </div>
                   ))}
               </S.HomeApresentation>

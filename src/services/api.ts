@@ -5,10 +5,20 @@ export const api = createApi({
     baseUrl: 'https://portfolio-api-eight.vercel.app'
   }),
   endpoints: (builder) => ({
-    getProfile: builder.query<MyProfile, void>({
-      query: () => '/data'
+    getPresentation: builder.query<Ipresentation, void>({
+      query: () => '/presentation'
+    }),
+    getSkills: builder.query<Iskills, void>({
+      query: () => '/skills'
+    }),
+    getProjects: builder.query<Iprojects, void>({
+      query: () => '/projects'
     })
   })
 })
 
-export const { useGetProfileQuery } = api 
+export const {
+  useGetPresentationQuery,
+  useGetSkillsQuery,
+  useGetProjectsQuery
+} = api

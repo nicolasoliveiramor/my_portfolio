@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { Colors } from '../../styles'
+import { Colors } from '../styles'
 
 export const HomeSection = styled.section`
   display: flex;
@@ -46,7 +46,7 @@ export const HomeApresentation = styled.div`
     margin: 1rem 0;
   }
 
-  p {
+  span {
     max-width: 500px;
     width: 100%;
     font-size: 1rem;
@@ -97,4 +97,10 @@ export const HomeButtonList = styled.ul`
       transform: scale(0.95);
     }
   }
+`
+
+export const ProjectsSection = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

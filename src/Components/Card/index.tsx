@@ -19,10 +19,10 @@ export const Card = ({ items }: Iprojects) => {
             <p>{item.description}</p>
             <S.CardButtonContainer>
               <button>
-                <a href={item.link}>Ver projeto</a>
+                <a href={item.link} target='_blank'>Ver projeto</a>
               </button>
               <button>
-                <a href={item.code}>Código no GitHub</a>
+                <a href={item.code} target='_blank'>Código no GitHub</a>
               </button>
             </S.CardButtonContainer>
           </S.CardInfos>

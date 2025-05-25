@@ -34,6 +34,7 @@ export const CardInfos = styled.div`
     height: 125px;
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 1rem;
   }
 `
@@ -58,7 +59,7 @@ export const CardButtonContainer = styled.div`
   gap: 2rem;
 
   button {
-    width: 150px;
+    width: 175px;
     max-width: 100%;
     height: 60px;
     background-color: ${Colors.blueButtonColor};
@@ -73,6 +74,11 @@ export const CardButtonContainer = styled.div`
       cursor: pointer;
       transition: all 0.1s ease-in-out;
       transform: scale(0.95);
+    }
+
+    a {
+      text-align: center;
+      padding: 1rem;
     }
   }
 `

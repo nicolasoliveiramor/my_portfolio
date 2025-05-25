@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Colors } from '../../styles'
 
 export const CardContainer = styled.div`
-  width: 400px;
+  width: auto;
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,14 @@ export const CardContainer = styled.div`
   justify-content: center;
   margin: 5rem;
   gap: 1rem;
+
+  img {
+    max-width: auto;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
 `
 
 export const CardInfos = styled.div`
@@ -22,6 +30,10 @@ export const CardInfos = styled.div`
   }
 
   p {
+    min-width: 250px;
+    height: 125px;
+    display: flex;
+    align-items: center;
     margin-top: 1rem;
   }
 `

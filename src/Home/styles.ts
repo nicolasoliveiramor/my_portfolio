@@ -82,19 +82,24 @@ export const HomeButtonList = styled.ul`
   gap: 3rem;
 
   button {
+    width: 200px;
     font-weight: bold;
     font-size: 1rem;
     border: none;
     border-radius: 8px;
     background-color: ${Colors.blueButtonColor};
     color: ${Colors.whiteFontColor};
-    padding: 1rem 2rem;
+    padding: 1rem;
 
     &:hover {
       background-color: ${Colors.blueButtonHover};
       cursor: pointer;
       transition: all 0.1s ease-in-out;
-      transform: scale(0.95);
+      transform: scale(0.97);
+    }
+
+    a {
+      padding: 2rem;
     }
   }
 `

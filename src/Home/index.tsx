@@ -5,7 +5,6 @@ import { RootReducer } from '../store'
 import { setRender } from '../store/reducers/render'
 
 import { CardContainer } from '../Container/CardContainer'
-// import PortfolioImg from '../../public/assets/images/foto_pro_portfolio.jpg'
 
 import * as S from './styles'
 
@@ -84,10 +83,24 @@ export const Home = () => {
             <S.HomeButtonContainer>
               <S.HomeButtonList>
                 <li>
-                  <button>Meu GitHub</button>
+                  <button>
+                    <a
+                      href="https://github.com/nicolasoliveiramor"
+                      target="_blank"
+                    >
+                      Meu GitHub
+                    </a>
+                  </button>
                 </li>
                 <li>
-                  <button>LinkedIn</button>
+                  <button>
+                    <a
+                      href="https://www.linkedin.com/in/nicolas-oliveira-mor-1397912ab"
+                      target="_blank"
+                    >
+                      LinkedIn
+                    </a>
+                  </button>
                 </li>
                 <li>
                   <button>Currículo</button>
@@ -95,12 +108,20 @@ export const Home = () => {
               </S.HomeButtonList>
               <S.HomeButtonList>
                 <li>
-                  <button onClick={() => handleRender('frontend')}>
+                  <button
+                    onClick={() => {
+                      handleRender('frontend')
+                    }}
+                  >
                     Projetos Front-End
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => handleRender('backend')}>
+                  <button
+                    onClick={() => {
+                      handleRender('backend')
+                    }}
+                  >
                     Projetos Back-End
                   </button>
                 </li>
@@ -109,10 +130,16 @@ export const Home = () => {
           </S.HomeContainer>
         )}
       </S.HomeSection>
-      <div className="container">
-        {activeComponent === 'frontend' && <CardContainer project="frontend" />}
-        {activeComponent === 'backend' && <CardContainer project="backend" />}
-      </div>
+      {activeComponent === 'frontend' && (
+        <div className="container">
+          <CardContainer project="frontend" />
+        </div>
+      )}
+      {activeComponent === 'backend' && (
+        <div className="container">
+          <CardContainer project="backend" />
+        </div>
+      )}
     </>
   )
 }

@@ -20,6 +20,8 @@ declare interface Iprojects {
   items: {
     id: number
     image: string
+    link: string
+    code: string
     title: string
     category: string
     technologies: string

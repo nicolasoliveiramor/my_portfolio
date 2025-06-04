@@ -1,9 +1,8 @@
 import styled from 'styled-components'
-import { Colors } from '../../styles'
+import { breakpoints, Colors } from '../../styles'
 
 export const CardContainer = styled.div`
   width: auto;
-  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +16,11 @@ export const CardContainer = styled.div`
     height: auto;
     border-radius: 8px;
     object-fit: cover;
+  }
+
+  @media (max-width: ${breakpoints.laptop}) {
+    height: auto;
+    margin: 2rem 0;
   }
 `
 

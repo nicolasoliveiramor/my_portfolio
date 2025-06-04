@@ -9,6 +9,14 @@ export const Colors = {
   lightThemeColor: '#fff'
 }
 
+export const breakpoints = {
+  laptop: '1445px',
+  desktop: '1025px',
+  tablet: '769px',
+  mobile: '426px',
+  small: '325px'
+}
+
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -18,6 +26,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', sans-serif;
     color: ${Colors.whiteFontColor};
     text-decoration: none;
+    overflow-x: hidden;
   }
 
   body {
@@ -25,9 +34,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .container {
-    max-width: 100vw;
-    width: 100%;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
   }
 `

@@ -1,42 +1,35 @@
 import { styled } from 'styled-components'
-import { Colors } from '../styles'
-
-export const HomeSection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-export const HomeContainer = styled.div`
-  width: 60%;
-  max-height: 100vh;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`
+import { breakpoints, Colors } from '../styles'
 
 export const HomeContent = styled.div`
+  max-width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 4rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 10rem;
 
   img {
-    max-width: 500px;
+    max-width: 550px;
     width: 100%;
-    height: 600px;
+    height: 550px;
     border-radius: 8px;
     object-fit: cover;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
   }
 `
 
 export const HomeApresentation = styled.div`
-  max-width: 500px;
   width: 100%;
-  max-height: 600px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,6 +57,17 @@ export const HomeApresentation = styled.div`
       margin-bottom: 0.15rem;
     }
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    div {
+      align-items: center;
+    }
+  }
 `
 
 export const HomeButtonContainer = styled.div`
@@ -72,6 +76,10 @@ export const HomeButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 2rem;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    gap: 1rem;
+  }
 `
 
 export const HomeButtonList = styled.ul`
@@ -82,7 +90,7 @@ export const HomeButtonList = styled.ul`
   gap: 3rem;
 
   button {
-    width: 200px;
+    width: 225px;
     font-weight: bold;
     font-size: 1rem;
     border: none;
@@ -90,6 +98,7 @@ export const HomeButtonList = styled.ul`
     background-color: ${Colors.blueButtonColor};
     color: ${Colors.whiteFontColor};
     padding: 1rem;
+    overflow-y: hidden;
 
     &:hover {
       background-color: ${Colors.blueButtonHover};
@@ -102,10 +111,13 @@ export const HomeButtonList = styled.ul`
       padding: 2rem;
     }
   }
-`
 
-export const ProjectsSection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @media (max-width: ${breakpoints.mobile}) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    gap: 1rem;
+  }
 `

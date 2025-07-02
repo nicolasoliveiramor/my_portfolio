@@ -114,7 +114,7 @@ export const Home = () => {
               </li>
               <li>
                 <button>
-                  <a href="portfolio_images/public/curriculo/curriculo.pdf" download target="_blank">Currículo</a>
+                  <a href="public/curriculo/curriculo.pdf" download target="_blank">Currículo</a>
                 </button>
               </li>
             </S.HomeButtonList>

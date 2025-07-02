@@ -114,7 +114,7 @@ export const Home = () => {
               </li>
               <li>
                 <button>
-                  <a href="https://portfolio-images-kappa.vercel.app/curriculo/curriculo.pdf" download>Currículo</a>
+                  <a href="portfolio_images/public/curriculo/curriculo.pdf" download target="_blank">Currículo</a>
                 </button>
               </li>
             </S.HomeButtonList>

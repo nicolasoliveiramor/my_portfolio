@@ -64,7 +64,7 @@ export const Home = () => {
       {presentationLoading || skillsLoading ? (
         <h1>Carregando...</h1>
       ) : (
-        <HomeContainer className='Apresentacao' background="left">
+        <HomeContainer className="Apresentacao" background="left">
           <S.HomeContent>
             <S.HomeApresentation>
               {presentationData &&
@@ -113,7 +113,9 @@ export const Home = () => {
                 </button>
               </li>
               <li>
-                <button>Currículo</button>
+                <button>
+                  <a href="https://portfolio-images-kappa.vercel.app/curriculo/curriculo.pdf" download>Currículo</a>
+                </button>
               </li>
             </S.HomeButtonList>
             <S.HomeButtonList>

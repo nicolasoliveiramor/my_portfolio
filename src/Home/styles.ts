@@ -121,3 +121,11 @@ export const HomeButtonList = styled.ul`
     gap: 1rem;
   }
 `
+
+export const Section = styled.section`
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`

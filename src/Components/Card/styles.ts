@@ -9,6 +9,7 @@ export const CardContainer = styled.div`
   justify-content: center;
   margin: 5rem;
   gap: 1rem;
+  overflow: hidden;
 
   img {
     max-width: auto;
@@ -16,6 +17,15 @@ export const CardContainer = styled.div`
     height: auto;
     border-radius: 8px;
     object-fit: cover;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    max-width: 100vw;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
   }
 
   @media (max-width: ${breakpoints.laptop}) {
@@ -35,7 +45,7 @@ export const CardInfos = styled.div`
 
   p {
     min-width: 250px;
-    height: 125px;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +74,6 @@ export const CardButtonContainer = styled.div`
 
   button {
     width: 175px;
-    max-width: 100%;
     height: 60px;
     background-color: ${Colors.blueButtonColor};
     border: none;
@@ -83,6 +92,16 @@ export const CardButtonContainer = styled.div`
     a {
       text-align: center;
       padding: 1rem;
+    }
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    button {
+      width: 90%;
+
+      a {
+        padding: 0;
+      }
     }
   }
 `

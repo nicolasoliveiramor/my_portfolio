@@ -18,5 +18,6 @@ export const HomeContainer = styled.div<HomecontainerProps>`
 
   @media (max-width: ${breakpoints.mobile}) {
     height: auto;
+    padding: 1rem;
   }
 `

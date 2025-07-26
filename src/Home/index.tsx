@@ -7,6 +7,7 @@ import { setSection } from '../store/reducers/render'
 
 import { CardContainer } from '../Containers/CardContainer'
 import { HomeContainer } from '../Containers/HomeContainer'
+import { Loader } from '../Components/Loader'
 
 import * as S from './styles'
 
@@ -52,11 +53,7 @@ export const Home = () => {
   }
 
   if (presentationLoading || skillsLoading) {
-    return (
-      <div className="container">
-        <h2>Carregando...</h2>
-      </div>
-    )
+    return <Loader />
   }
 
   return (
@@ -114,7 +111,9 @@ export const Home = () => {
               </li>
               <li>
                 <button>
-                  <a href="/curriculo/curriculo.pdf" download>Currículo</a>
+                  <a href="/curriculo/curriculo.pdf" download>
+                    Currículo
+                  </a>
                 </button>
               </li>
             </S.HomeButtonList>
@@ -144,14 +143,14 @@ export const Home = () => {
       {activeSection === true ? (
         <HomeContainer background="right">
           {activeComponent === 'frontend' && (
-            <div className="container">
+            <S.Section className="container">
               <CardContainer project="frontend" />
-            </div>
+            </S.Section>
           )}
           {activeComponent === 'backend' && (
-            <div className="container">
+            <S.Section className="container">
               <h1>Não há projetos no momento...</h1>
-            </div>
+            </S.Section>
           )}
         </HomeContainer>
       ) : null}

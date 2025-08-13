@@ -5,7 +5,7 @@ import { useGetProjectsQuery } from '../../services/api'
 import * as S from './styles'
 
 type CardContainerProps = {
-  project: 'frontend' | 'backend'
+  project: 'frontend' | 'fullstack'
 }
 
 export const CardContainer = ({ project }: CardContainerProps) => {

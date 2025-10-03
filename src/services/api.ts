@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://portfolio-api-eight.vercel.app'
+    baseUrl: 'https://portfolio-api-red-seven.vercel.app/'
   }),
   endpoints: (builder) => ({
     getPresentation: builder.query<Ipresentation, void>({

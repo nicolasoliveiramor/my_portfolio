@@ -11,9 +11,8 @@ declare interface Iskills {
   sectionTitle: string
   items: {
     id: number
-    title: string
     technologies: string
-  }[]
+  }
 }
 
 declare interface Iprojects {

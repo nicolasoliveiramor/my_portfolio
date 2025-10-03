@@ -7,6 +7,7 @@ import { setSection } from '../store/reducers/render'
 
 import { CardContainer } from '../Containers/CardContainer'
 import { HomeContainer } from '../Containers/HomeContainer'
+import { Button } from '../Components/Atoms/Buttons'
 import { Loader } from '../Components/Loader'
 
 import * as S from './styles'
@@ -90,51 +91,51 @@ export const Home = () => {
           <S.HomeButtonContainer>
             <S.HomeButtonList>
               <li>
-                <button>
+                <Button>
                   <a
                     href="https://github.com/nicolasoliveiramor"
                     target="_blank"
                   >
                     Meu GitHub
                   </a>
-                </button>
+                </Button>
               </li>
               <li>
-                <button>
+                <Button>
                   <a
                     href="https://www.linkedin.com/in/nicolas-oliveira-mor-1397912ab"
                     target="_blank"
                   >
                     LinkedIn
                   </a>
-                </button>
+                </Button>
               </li>
               <li>
-                <button>
+                <Button>
                   <a href="/curriculo/curriculo.pdf" download>
                     Currículo
                   </a>
-                </button>
+                </Button>
               </li>
             </S.HomeButtonList>
             <S.HomeButtonList>
               <li>
-                <button
+                <Button
                   onClick={() => {
                     handleRender('frontend')
                   }}
                 >
                   Projetos Front-End
-                </button>
+                </Button>
               </li>
               <li>
-                <button
+                <Button
                   onClick={() => {
                     handleRender('fullstack')
                   }}
                 >
                   Projetos Full-Stack
-                </button>
+                </Button>
               </li>
             </S.HomeButtonList>
           </S.HomeButtonContainer>

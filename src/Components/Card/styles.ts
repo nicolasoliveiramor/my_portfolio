@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, Colors } from '../../styles'
+import { breakpoints } from '../../styles'
 
 export const CardContainer = styled.div`
   width: auto;
@@ -71,37 +71,4 @@ export const CardButtonContainer = styled.div`
   justify-content: center;
   margin-top: 1rem;
   gap: 2rem;
-
-  button {
-    width: 175px;
-    height: 60px;
-    background-color: ${Colors.blueButtonColor};
-    border: none;
-    border-radius: 8px;
-    margin: 0.25rem 0;
-    font-weight: bold;
-    font-size: 1rem;
-
-    &:hover {
-      background-color: ${Colors.blueButtonHover};
-      cursor: pointer;
-      transition: all 0.1s ease-in-out;
-      transform: scale(0.95);
-    }
-
-    a {
-      text-align: center;
-      padding: 1rem;
-    }
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    button {
-      width: 90%;
-
-      a {
-        padding: 0;
-      }
-    }
-  }
 `

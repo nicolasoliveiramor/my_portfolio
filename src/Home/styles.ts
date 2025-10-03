@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { breakpoints, Colors } from '../styles'
+import { breakpoints, heights } from '../styles'
 
 export const HomeContent = styled.div`
   max-width: 100vw;
@@ -25,6 +25,22 @@ export const HomeContent = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2rem;
+  }
+
+  @media (max-height: ${heights.maxHeight}) {
+    gap: 2rem;
+
+    img {
+      height: 300px;
+      max-width: 320px;
+    }
+  }
+
+  @media (max-height: ${heights.minHeight}) {
+    img {
+      height: 220px;
+      max-width: 240px;
+    }
   }
 `
 
@@ -68,6 +84,31 @@ export const HomeApresentation = styled.div`
       align-items: center;
     }
   }
+
+  @media (max-height: ${heights.maxHeight}) {
+    h2 {
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
+    }
+
+    span {
+      font-size: 0.95rem;
+    }
+
+    div {
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  @media (max-height: ${heights.minHeight}) {
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    span {
+      font-size: 0.9rem;
+    }
+  }
 `
 
 export const HomeButtonContainer = styled.div`
@@ -80,6 +121,10 @@ export const HomeButtonContainer = styled.div`
   @media (max-width: ${breakpoints.tablet}) {
     gap: 1rem;
   }
+
+  @media (max-height: ${heights.maxHeight}) {
+    gap: 1rem;
+  }
 `
 
 export const HomeButtonList = styled.ul`
@@ -89,29 +134,6 @@ export const HomeButtonList = styled.ul`
   justify-content: center;
   gap: 3rem;
 
-  button {
-    width: 225px;
-    font-weight: bold;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    background-color: ${Colors.blueButtonColor};
-    color: ${Colors.whiteFontColor};
-    padding: 1rem;
-    overflow-y: hidden;
-
-    &:hover {
-      background-color: ${Colors.blueButtonHover};
-      cursor: pointer;
-      transition: all 0.1s ease-in-out;
-      transform: scale(0.97);
-    }
-
-    a {
-      padding: 2rem;
-    }
-  }
-
   @media (max-width: ${breakpoints.mobile}) {
     display: flex;
     flex-direction: column;
@@ -120,12 +142,21 @@ export const HomeButtonList = styled.ul`
   @media (max-width: ${breakpoints.tablet}) {
     gap: 1rem;
   }
+
+  @media (max-height: ${heights.maxHeight}) {
+    gap: 1rem;
+  }
 `
 
 export const Section = styled.section`
-  min-height: 100vh;
+  min-height: 100svh;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-height: ${heights.maxHeight}) {
+    min-height: auto;
+    padding: 1rem 0;
+  }
 `

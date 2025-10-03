@@ -1,3 +1,5 @@
+import { Button } from '../Atoms/Buttons'
+
 import * as S from './styles'
 
 export const Card = ({ items }: Iprojects) => {
@@ -18,12 +20,16 @@ export const Card = ({ items }: Iprojects) => {
             </S.TechnologiesContainer>
             <p>{item.description}</p>
             <S.CardButtonContainer>
-              <button>
-                <a href={item.link} target='_blank'>Ver projeto</a>
-              </button>
-              <button>
-                <a href={item.code} target='_blank'>Código no GitHub</a>
-              </button>
+              <Button>
+                <a href={item.link} target="_blank">
+                  Ver projeto
+                </a>
+              </Button>
+              <Button>
+                <a href={item.code} target="_blank">
+                  Ver código
+                </a>
+              </Button>
             </S.CardButtonContainer>
           </S.CardInfos>
         </S.CardContainer>

@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { breakpoints, Colors } from '../../styles'
+import { breakpoints, Colors, heights } from '../../styles'
 
 import { HomecontainerProps } from './'
 
 export const HomeContainer = styled.div<HomecontainerProps>`
   max-width: 100vw;
   width: 100%;
-  height: ${(props) => (props.className === 'Apresentacao' ? '100vh' : 'auto')};
+  min-height: ${(props) => (props.className === 'Apresentacao' ? '100svh' : 'auto')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,13 @@ export const HomeContainer = styled.div<HomecontainerProps>`
       : Colors.darkThemeColor};
 
   @media (max-width: ${breakpoints.mobile}) {
-    height: auto;
+    min-height: auto;
     padding: 1rem;
+  }
+
+  @media (max-height: ${heights.maxHeight}) {
+    min-height: auto;
+    padding: 1rem 0;
+    align-items: flex-start;
   }
 `

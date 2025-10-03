@@ -17,6 +17,11 @@ export const breakpoints = {
   small: '325px'
 }
 
+export const heights = {
+  maxHeight: '600px',
+  minHeight: '450px'
+}
+
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;

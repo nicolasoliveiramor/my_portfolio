@@ -59,88 +59,87 @@ export const Home = () => {
 
   return (
     <>
-      {presentationLoading || skillsLoading ? (
-        <h1>Carregando...</h1>
-      ) : (
-        <HomeContainer className="Apresentacao" background="left">
-          <S.HomeContent>
-            <S.HomeApresentation>
-              {presentationData &&
-                presentationData.items.map((item) => (
+      <HomeContainer className="Apresentacao" background="left">
+        <S.HomeContent>
+          <S.HomeApresentation>
+            {presentationData &&
+              presentationData.items.map((item) => (
+                <div key={item.id}>
+                  <h2>{item.title}</h2>
+                  <span>{item.description}</span>
+                </div>
+              ))}
+            <h2>{skillsData?.sectionTitle}</h2>
+            {skillsData && (
+              <div>
+                {skillsData.items.map((item) => (
                   <div key={item.id}>
-                    <h2>{item.title}</h2>
-                    <span>{item.description}</span>
+                    <ul>
+                      {item.technologies.map((tech) => (
+                        <li key={`${item.id}-${tech}`}>{tech}</li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
-              <h2>{skillsData && skillsData.sectionTitle}</h2>
-              {skillsData &&
-                skillsData.items.map((item) => (
-                  <div key={item.id}>
-                    <div>
-                      <h4>{item.title}</h4>
-                      <span>{item.technologies}</span>
-                    </div>
-                  </div>
-                ))}
-            </S.HomeApresentation>
-            <img
-              src={presentationData && presentationData.image}
-              alt="Imagem do Pefil"
-            />
-          </S.HomeContent>
-          <S.HomeButtonContainer>
-            <S.HomeButtonList>
-              <li>
-                <Button>
-                  <a
-                    href="https://github.com/nicolasoliveiramor"
-                    target="_blank"
-                  >
-                    Meu GitHub
-                  </a>
-                </Button>
-              </li>
-              <li>
-                <Button>
-                  <a
-                    href="https://www.linkedin.com/in/nicolas-oliveira-mor-1397912ab"
-                    target="_blank"
-                  >
-                    LinkedIn
-                  </a>
-                </Button>
-              </li>
-              <li>
-                <Button>
-                  <a href="/curriculo/curriculo.pdf" download>
-                    Currículo
-                  </a>
-                </Button>
-              </li>
-            </S.HomeButtonList>
-            <S.HomeButtonList>
-              <li>
-                <Button
-                  onClick={() => {
-                    handleRender('frontend')
-                  }}
+              </div>
+            )}
+          </S.HomeApresentation>
+          <img src={presentationData?.image ?? ''} alt="Imagem do Perfil" />
+        </S.HomeContent>
+        <S.HomeButtonContainer>
+          <S.HomeButtonList>
+            <li>
+              <Button>
+                <a
+                  href="https://github.com/nicolasoliveiramor"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Projetos Front-End
-                </Button>
-              </li>
-              <li>
-                <Button
-                  onClick={() => {
-                    handleRender('fullstack')
-                  }}
+                  Meu GitHub
+                </a>
+              </Button>
+            </li>
+            <li>
+              <Button>
+                <a
+                  href="https://www.linkedin.com/in/nicolasoliveiramor"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Projetos Full-Stack
-                </Button>
-              </li>
-            </S.HomeButtonList>
-          </S.HomeButtonContainer>
-        </HomeContainer>
-      )}
+                  LinkedIn
+                </a>
+              </Button>
+            </li>
+            <li>
+              <Button>
+                <a href="/curriculo/curriculo.pdf" download>
+                  Currículo
+                </a>
+              </Button>
+            </li>
+          </S.HomeButtonList>
+          <S.HomeButtonList>
+            <li>
+              <Button
+                onClick={() => {
+                  handleRender('frontend')
+                }}
+              >
+                Projetos Front-End
+              </Button>
+            </li>
+            <li>
+              <Button
+                onClick={() => {
+                  handleRender('fullstack')
+                }}
+              >
+                Projetos Full-Stack
+              </Button>
+            </li>
+          </S.HomeButtonList>
+        </S.HomeButtonContainer>
+      </HomeContainer>
       {activeSection === true ? (
         <HomeContainer background="right">
           {activeComponent === 'frontend' && (

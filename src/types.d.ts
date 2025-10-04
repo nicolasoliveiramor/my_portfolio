@@ -23,7 +23,7 @@ declare interface Iprojects {
     code: string
     title: string
     category: string
-    technologies: string
+    technologies: string[]
     description: string
   }[]
 }

@@ -13,9 +13,9 @@ export const Card = ({ items }: Iprojects) => {
             <h4>Técnologias:</h4>
             <S.TechnologiesContainer>
               <ul>
-                <li>
-                  <span>{item.technologies}</span>
-                </li>
+                {item.technologies.map((tech) => (
+                  <li key={tech}>{tech}</li>
+                ))}
               </ul>
             </S.TechnologiesContainer>
             <p>{item.description}</p>

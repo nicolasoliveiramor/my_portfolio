@@ -17,6 +17,7 @@ export const HomeContent = styled.div`
     height: 550px;
     border-radius: 8px;
     object-fit: cover;
+    margin-right: 1.5rem;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
@@ -25,10 +26,12 @@ export const HomeContent = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    padding: 0 1rem;
   }
 
   @media (max-height: ${heights.maxHeight}) {
     gap: 2rem;
+    padding: 0 1rem;
 
     img {
       height: 300px;
@@ -37,6 +40,8 @@ export const HomeContent = styled.div`
   }
 
   @media (max-height: ${heights.minHeight}) {
+    padding: 0 0.75rem;
+
     img {
       height: 220px;
       max-width: 240px;
@@ -49,6 +54,7 @@ export const HomeApresentation = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 1.5rem;
 
   h2 {
     font-weight: bold;
@@ -56,8 +62,6 @@ export const HomeApresentation = styled.div`
   }
 
   span {
-    max-width: 500px;
-    width: 100%;
     font-size: 1rem;
     font-weight: normal;
   }
@@ -74,18 +78,45 @@ export const HomeApresentation = styled.div`
     }
   }
 
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    padding: 0;
+    justify-content: flex-start;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+  }
+
   @media (max-width: ${breakpoints.tablet}) {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 0 1rem;
 
     div {
       align-items: center;
     }
+
+    ul {
+      justify-content: center;
+    }
   }
 
   @media (max-height: ${heights.maxHeight}) {
+    padding: 0 1rem;
+
     h2 {
       margin: 0.5rem 0;
       font-size: 1.25rem;
@@ -98,9 +129,20 @@ export const HomeApresentation = styled.div`
     div {
       margin-bottom: 0.35rem;
     }
+
+    ul {
+      gap: 0.35rem;
+
+      li {
+        font-size: 0.85rem;
+        padding: 0.3rem 0.5rem;
+      }
+    }
   }
 
   @media (max-height: ${heights.minHeight}) {
+    padding: 0 0.75rem;
+
     h2 {
       font-size: 1.1rem;
     }

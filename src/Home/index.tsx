@@ -112,7 +112,7 @@ export const Home = () => {
             </li>
             <li>
               <Button>
-                <a href="/curriculo/curriculo.pdf" download>
+                <a href="/curriculo/cv_nicolas_oliveira_mor.pdf" download>
                   Currículo
                 </a>
               </Button>

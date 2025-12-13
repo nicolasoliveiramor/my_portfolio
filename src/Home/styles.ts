@@ -155,10 +155,10 @@ export const HomeApresentation = styled.div`
 
 export const HomeButtonContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
 
   @media (max-width: ${breakpoints.tablet}) {
     gap: 1rem;
@@ -174,7 +174,7 @@ export const HomeButtonList = styled.ul`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 1rem;
 
   @media (max-width: ${breakpoints.mobile}) {
     display: flex;

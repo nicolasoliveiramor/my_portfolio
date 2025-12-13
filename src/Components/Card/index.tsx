@@ -8,9 +8,13 @@ export const Card = ({ items }: Iprojects) => {
       {items.map((item) => (
         <S.CardContainer key={item.id}>
           <h2>{item.title}</h2>
-          <img src={item.image} alt={`Imagem  do  projeto ${item.title}`} />
+          <img
+            src={item.image}
+            alt={`Imagem  do  projeto ${item.title}`}
+            loading="lazy"
+          />
           <S.CardInfos>
-            <h4>Técnologias:</h4>
+            <h4>Tecnologias:</h4>
             <S.TechnologiesContainer>
               <ul>
                 {item.technologies.map((tech) => (
@@ -33,7 +37,7 @@ export const Card = ({ items }: Iprojects) => {
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      Ver código backend
+                      Código backend
                     </a>
                   </Button>
                   <Button compact>
@@ -42,14 +46,14 @@ export const Card = ({ items }: Iprojects) => {
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      Ver código frontend
+                      Código frontend
                     </a>
                   </Button>
                 </>
               ) : (
                 <Button>
                   <a href={item.code} rel="noopener noreferrer" target="_blank">
-                    Ver código frontend
+                    Código frontend
                   </a>
                 </Button>
               )}

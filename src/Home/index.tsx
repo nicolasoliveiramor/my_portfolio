@@ -21,7 +21,7 @@ export const Home = () => {
     (state: RootReducer) => state.render.activeSection
   )
 
-  const handleRender = (type: 'frontend' | 'fullstack') => {
+  const handleRender = (type: 'frontend' | 'fullstack' | 'all') => {
     if (activeComponent === type && activeSection) {
       dispatch(setSection(false))
       dispatch(setComponent(null))
@@ -122,19 +122,10 @@ export const Home = () => {
             <li>
               <Button
                 onClick={() => {
-                  handleRender('frontend')
+                  handleRender('all')
                 }}
               >
-                Projetos Front-End
-              </Button>
-            </li>
-            <li>
-              <Button
-                onClick={() => {
-                  handleRender('fullstack')
-                }}
-              >
-                Projetos Full-Stack
+                Projetos
               </Button>
             </li>
           </S.HomeButtonList>
@@ -142,14 +133,9 @@ export const Home = () => {
       </HomeContainer>
       {activeSection === true ? (
         <HomeContainer background="right">
-          {activeComponent === 'frontend' && (
+          {activeComponent === 'all' && (
             <S.Section className="container">
-              <CardContainer project="frontend" />
-            </S.Section>
-          )}
-          {activeComponent === 'fullstack' && (
-            <S.Section className="container">
-              <CardContainer project="fullstack" />
+              <CardContainer project="all" />
             </S.Section>
           )}
         </HomeContainer>

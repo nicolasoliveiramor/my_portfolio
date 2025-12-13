@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type RenderState = {
-  activeComponent: 'frontend' | 'fullstack' | null
+  activeComponent: 'frontend' | 'fullstack' | 'all' | null
   activeSection: boolean
 }
 
@@ -16,7 +16,7 @@ const renderSlice = createSlice({
   reducers: {
     setComponent: (
       state,
-      action: PayloadAction<'frontend' | 'fullstack' | null>
+      action: PayloadAction<'frontend' | 'fullstack' | 'all' | null>
     ) => {
       state.activeComponent = action.payload
     },

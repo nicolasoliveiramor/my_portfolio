@@ -47,7 +47,7 @@ export const CardInfos = styled.div`
 
   p {
     min-width: 250px;
-    height: auto;
+    min-height: 9rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,4 +113,17 @@ export const CardButtonContainer = styled.div`
   justify-content: center;
   margin-top: 1rem;
   gap: 2rem;
+
+  @media (max-width: ${breakpoints.laptop}) {
+    gap: 1.25rem;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    gap: 1rem;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
 `

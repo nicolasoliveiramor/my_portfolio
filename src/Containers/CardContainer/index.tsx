@@ -5,7 +5,7 @@ import { useGetProjectsQuery } from '../../services/api'
 import * as S from './styles'
 
 type CardContainerProps = {
-  project: Iprojects['items'][number]['category']
+  project: Iprojects['items'][number]['category'] | 'all'
 }
 
 export const CardContainer = ({ project }: CardContainerProps) => {
@@ -30,9 +30,8 @@ export const CardContainer = ({ project }: CardContainerProps) => {
     )
   }
 
-  const filteredItems: Iprojects['items'] = data.items.filter(
-    (item) => item.category === project
-  )
+  const filteredItems: Iprojects['items'] =
+    project === 'all' ? data.items : data.items.filter((item) => item.category === project)
 
   if (filteredItems.length === 0) {
     return (
@@ -41,7 +40,9 @@ export const CardContainer = ({ project }: CardContainerProps) => {
           <h2>
             {project === 'frontend'
               ? 'Não há projetos de Front-End no momento.'
-              : 'Não há projetos de Back-End no momento.'}
+              : project === 'fullstack'
+              ? 'Não há projetos de Back-End no momento.'
+              : 'Não há projetos cadastrados no momento.'}
           </h2>
         </S.Projects>
       </div>

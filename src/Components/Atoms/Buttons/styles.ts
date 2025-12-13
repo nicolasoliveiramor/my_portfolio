@@ -2,7 +2,10 @@ import { styled } from 'styled-components'
 
 import { Colors, heights } from '../../../styles'
 
-export const AnimatedButton = styled.button<{ compact?: boolean }>`
+export const AnimatedButton = styled.button<{
+  compact?: boolean
+  fluidMobile?: boolean
+}>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -48,5 +51,34 @@ export const AnimatedButton = styled.button<{ compact?: boolean }>`
     min-height: ${(p) => (p.compact ? '46px' : '48px')};
     width: ${(p) => (p.compact ? '150px' : '160px')};
     font-size: ${(p) => (p.compact ? '0.9rem' : '0.95rem')};
+  }
+
+  @media (max-width: 450px) {
+    width: ${(p) => (p.fluidMobile ? '100%' : p.compact ? '170px' : '180px')};
+    max-width: ${(p) => (p.fluidMobile ? '100%' : 'none')};
+    padding: ${(p) =>
+      p.fluidMobile
+        ? p.compact
+          ? '0.85rem 1.1rem'
+          : '0.95rem 1.25rem'
+        : p.compact
+          ? '1rem 2rem'
+          : '1.25rem 2.5rem'};
+    min-height: ${(p) =>
+      p.fluidMobile
+        ? p.compact
+          ? '46px'
+          : '50px'
+        : p.compact
+          ? '54px'
+          : '60px'};
+    font-size: ${(p) =>
+      p.fluidMobile
+        ? p.compact
+          ? '0.9rem'
+          : '0.95rem'
+        : p.compact
+          ? '0.95rem'
+          : '1rem'};
   }
 `

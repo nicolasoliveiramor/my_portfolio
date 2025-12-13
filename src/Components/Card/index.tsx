@@ -24,14 +24,14 @@ export const Card = ({ items }: Iprojects) => {
             </S.TechnologiesContainer>
             <p>{item.description}</p>
             <S.CardButtonContainer>
-              <Button>
+              <Button fluidMobile>
                 <a href={item.link} rel="noopener noreferrer" target="_blank">
                   Ver projeto
                 </a>
               </Button>
               {'codeback' in item ? (
                 <>
-                  <Button compact>
+                  <Button compact fluidMobile>
                     <a
                       href={item.codeback}
                       rel="noopener noreferrer"
@@ -40,7 +40,7 @@ export const Card = ({ items }: Iprojects) => {
                       Código backend
                     </a>
                   </Button>
-                  <Button compact>
+                  <Button compact fluidMobile>
                     <a
                       href={item.code}
                       rel="noopener noreferrer"
@@ -51,7 +51,7 @@ export const Card = ({ items }: Iprojects) => {
                   </Button>
                 </>
               ) : (
-                <Button>
+                <Button fluidMobile>
                   <a href={item.code} rel="noopener noreferrer" target="_blank">
                     Código frontend
                   </a>

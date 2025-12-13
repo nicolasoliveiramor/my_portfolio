@@ -124,6 +124,14 @@ export const CardButtonContainer = styled.div`
 
   @media (max-width: ${breakpoints.mobile}) {
     gap: 0.75rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0.75rem;
   }
 `

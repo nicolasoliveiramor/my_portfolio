@@ -162,6 +162,7 @@ export const HomeButtonContainer = styled.div`
 
   @media (max-width: ${breakpoints.tablet}) {
     gap: 1rem;
+    flex-direction: column;
   }
 
   @media (max-height: ${heights.maxHeight}) {

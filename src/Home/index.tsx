@@ -149,7 +149,7 @@ export const Home = () => {
           )}
           {activeComponent === 'fullstack' && (
             <S.Section className="container">
-              <h1>Não há projetos no momento...</h1>
+              <CardContainer project="fullstack" />
             </S.Section>
           )}
         </HomeContainer>

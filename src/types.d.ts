@@ -21,8 +21,9 @@ declare interface Iprojects {
     image: string
     link: string
     code: string
+    codeback?: string
     title: string
-    category: string
+    category: 'frontend' | 'fullstack'
     technologies: string[]
     description: string
   }[]

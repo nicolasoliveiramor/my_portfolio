@@ -21,15 +21,38 @@ export const Card = ({ items }: Iprojects) => {
             <p>{item.description}</p>
             <S.CardButtonContainer>
               <Button>
-                <a href={item.link} target="_blank">
+                <a href={item.link} rel="noopener noreferrer" target="_blank">
                   Ver projeto
                 </a>
               </Button>
-              <Button>
-                <a href={item.code} target="_blank">
-                  Ver código
-                </a>
-              </Button>
+              {'codeback' in item ? (
+                <>
+                  <Button compact>
+                    <a
+                      href={item.codeback}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ver código backend
+                    </a>
+                  </Button>
+                  <Button compact>
+                    <a
+                      href={item.code}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      Ver código frontend
+                    </a>
+                  </Button>
+                </>
+              ) : (
+                <Button>
+                  <a href={item.code} rel="noopener noreferrer" target="_blank">
+                    Ver código frontend
+                  </a>
+                </Button>
+              )}
             </S.CardButtonContainer>
           </S.CardInfos>
         </S.CardContainer>

@@ -2,20 +2,20 @@ import { styled } from 'styled-components'
 
 import { Colors, heights } from '../../../styles'
 
-export const AnimatedButton = styled.button`
+export const AnimatedButton = styled.button<{ compact?: boolean }>`
   position: relative;
   z-index: 2;
-  padding: 1.25rem 2.5rem;
+  padding: ${(p) => (p.compact ? '1rem 2rem' : '1.25rem 2.5rem')};
   font-weight: bold;
-  font-size: 1rem;
+  font-size: ${(p) => (p.compact ? '0.95rem' : '1rem')};
   border: none;
   border-radius: 8px;
   color: ${Colors.whiteFontColor};
   background-color: ${Colors.blueButtonColor};
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
-  width: 180px;
-  min-height: 60px;
+  width: ${(p) => (p.compact ? '150px' : '180px')};
+  min-height: ${(p) => (p.compact ? '54px' : '60px')};
 
   &:hover {
     transform: scale(0.9);
@@ -26,9 +26,9 @@ export const AnimatedButton = styled.button`
   }
 
   @media (max-height: ${heights.maxHeight}) {
-    padding: 0.9rem 1.6rem;
-    min-height: 48px;
-    width: 160px;
-    font-size: 0.95rem;
+    padding: ${(p) => (p.compact ? '0.8rem 1.4rem' : '0.9rem 1.6rem')};
+    min-height: ${(p) => (p.compact ? '46px' : '48px')};
+    width: ${(p) => (p.compact ? '140px' : '160px')};
+    font-size: ${(p) => (p.compact ? '0.9rem' : '0.95rem')};
   }
 `

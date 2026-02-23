@@ -24,38 +24,62 @@ export const Card = ({ items }: Iprojects) => {
             </S.TechnologiesContainer>
             <p>{item.description}</p>
             <S.CardButtonContainer>
-              <Button fluidMobile>
-                <a href={item.link} rel="noopener noreferrer" target="_blank">
+              {item.link ? (
+                <Button
+                  fluidMobile
+                  href={item.link}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
                   Ver projeto
-                </a>
-              </Button>
-              {'codeback' in item ? (
+                </Button>
+              ) : (
+                <Button fluidMobile disabled>
+                  Ver projeto
+                </Button>
+              )}
+              {'codeback' in item && item.codeback ? (
                 <>
-                  <Button compact fluidMobile>
-                    <a
-                      href={item.codeback}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      Código backend
-                    </a>
+                  <Button
+                    compact
+                    fluidMobile
+                    href={item.codeback}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Código backend
                   </Button>
-                  <Button compact fluidMobile>
-                    <a
+                  {item.code ? (
+                    <Button
+                      compact
+                      fluidMobile
                       href={item.code}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
                       Código frontend
-                    </a>
-                  </Button>
+                    </Button>
+                  ) : (
+                    <Button compact fluidMobile disabled>
+                      Código frontend
+                    </Button>
+                  )}
                 </>
               ) : (
-                <Button fluidMobile>
-                  <a href={item.code} rel="noopener noreferrer" target="_blank">
+                item.code ? (
+                  <Button
+                    fluidMobile
+                    href={item.code}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     Código frontend
-                  </a>
-                </Button>
+                  </Button>
+                ) : (
+                  <Button fluidMobile disabled>
+                    Código frontend
+                  </Button>
+                )
               )}
             </S.CardButtonContainer>
           </S.CardInfos>

@@ -9,9 +9,7 @@ function App() {
   return (
     <Provider store={store}>
       <GlobalStyle />
-      <div className="container">
-        <Home />
-      </div>
+      <Home />
     </Provider>
   )
 }

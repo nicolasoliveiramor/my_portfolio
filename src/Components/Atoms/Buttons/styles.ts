@@ -1,8 +1,8 @@
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 
 import { Colors, heights } from '../../../styles'
 
-export const AnimatedButton = styled.button<{
+const controlStyles = css<{
   compact?: boolean
   fluidMobile?: boolean
 }>`
@@ -17,33 +17,34 @@ export const AnimatedButton = styled.button<{
   color: ${Colors.whiteFontColor};
   background-color: ${Colors.blueButtonColor};
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  text-align: center;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
   width: ${(p) => (p.compact ? '140px' : '210px')};
   min-height: ${(p) => (p.compact ? '60px' : '66px')};
 
-  a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    color: inherit;
-    text-decoration: none;
-    white-space: wrap;
-  }
-
   &:hover {
-    transform: scale(0.9);
+    background-color: ${Colors.blueButtonHover};
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   }
 
   &:active {
-    transform: scale(0.85);
+    transform: translateY(0);
   }
 
   &:focus-visible {
     outline: 2px solid rgba(255, 255, 255, 0.7);
     outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
   }
 
   @media (max-height: ${heights.maxHeight}) {
@@ -81,4 +82,19 @@ export const AnimatedButton = styled.button<{
           ? '0.95rem'
           : '1rem'};
   }
+`
+
+export const AnimatedButton = styled.button<{
+  compact?: boolean
+  fluidMobile?: boolean
+}>`
+  ${controlStyles}
+`
+
+export const AnimatedLink = styled.a<{
+  compact?: boolean
+  fluidMobile?: boolean
+}>`
+  ${controlStyles}
+  text-decoration: none;
 `

@@ -247,7 +247,7 @@ export const Home = () => {
                 rel="noopener noreferrer"
               >
                 <h3>WhatsApp</h3>
-                <p>Me chame no WhatsApp: +55 (11) 93396-1754</p>
+                <p>Me chame no WhatsApp</p>
               </S.ContactCard>
             </S.ContactGrid>
           </S.SectionInner>

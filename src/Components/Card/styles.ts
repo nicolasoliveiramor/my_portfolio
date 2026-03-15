@@ -3,6 +3,7 @@ import { breakpoints, Colors } from '../../styles'
 
 export const CardContainer = styled.div`
   width: 100%;
+  height: 824px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -28,24 +29,26 @@ export const CardContainer = styled.div`
     border-radius: 14px;
     object-fit: cover;
     border: 1px solid ${Colors.border};
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    max-width: 100vw;
-    width: 100%;
-
-    img {
-      width: 100%;
-    }
+    flex: 0 0 auto;
   }
 
   @media (max-width: ${breakpoints.laptop}) {
-    height: auto;
+    height: 500px;
     margin: 0;
     padding: 14px;
 
     img {
       height: 200px;
+    }
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: auto;
+    max-width: 100vw;
+    width: 100%;
+
+    img {
+      width: 100%;
     }
   }
 `
@@ -55,11 +58,17 @@ export const CardInfos = styled.div`
   flex-direction: column;
   text-align: left;
   gap: 10px;
+  flex: 1;
+  min-height: 0;
 
   h2 {
     margin: 0;
     font-size: 1.25rem;
     letter-spacing: -0.02em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   h4 {
@@ -73,6 +82,7 @@ export const CardInfos = styled.div`
     margin: 0;
     color: ${Colors.textMuted};
     line-height: 1.55;
+    overflow: hidden;
   }
 `
 
@@ -132,7 +142,8 @@ export const CardButtonContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 6px;
+  margin-top: auto;
+  padding-top: 6px;
   gap: 10px;
   flex-wrap: wrap;
 

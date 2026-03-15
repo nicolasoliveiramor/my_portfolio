@@ -3,9 +3,9 @@ import { createGlobalStyle } from 'styled-components'
 export const Colors = {
   whiteFontColor: '#fff',
   blackFontColor: '#000',
-  blueButtonColor: '#1E90FF',
-  blueButtonHover: '#125699',
-  darkThemeColor: '#111216',
+  blueButtonColor: '#3B82F6',
+  blueButtonHover: '#2563EB',
+  darkThemeColor: '#0B0F14',
   lightThemeColor: '#fff',
   textMuted: 'rgba(255, 255, 255, 0.72)',
   surface: 'rgba(255, 255, 255, 0.06)',
@@ -49,14 +49,20 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     color: ${Colors.whiteFontColor};
     background:
+      linear-gradient(
+        180deg,
+        rgba(11, 15, 20, 0.78) 0%,
+        rgba(11, 15, 20, 0.9) 45%,
+        rgba(11, 15, 20, 0.84) 100%
+      ),
       radial-gradient(
         1400px 1000px at 50% 45%,
         rgba(0, 0, 0, 0) 0%,
         rgba(0, 0, 0, 0.35) 58%,
         rgba(0, 0, 0, 0.88) 100%
       ),
-      radial-gradient(900px 600px at 18% 12%, rgba(30, 144, 255, 0.16), transparent 62%),
-      radial-gradient(700px 520px at 82% 28%, rgba(125, 211, 252, 0.1), transparent 62%),
+      radial-gradient(900px 600px at 18% 12%, rgba(59, 130, 246, 0.18), transparent 62%),
+      radial-gradient(700px 520px at 82% 28%, rgba(34, 211, 238, 0.1), transparent 62%),
       radial-gradient(900px 700px at 50% 110%, rgba(0, 0, 0, 0.55), transparent 55%),
       ${Colors.darkThemeColor};
   }

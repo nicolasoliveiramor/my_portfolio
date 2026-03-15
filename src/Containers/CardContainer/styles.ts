@@ -2,6 +2,108 @@ import styled, { keyframes } from 'styled-components'
 
 import { breakpoints, Colors } from '../../styles'
 
+export const Container = styled.div`
+  width: 100%;
+`
+
+export const CarouselFrame = styled.div`
+  width: 100%;
+  position: relative;
+  padding: 0 56px 40px;
+
+  .swiper {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+  }
+
+  .swiper:active {
+    cursor: grabbing;
+  }
+
+  .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: ${Colors.whiteFontColor};
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 0 48px 36px;
+  }
+`
+
+export const NavButton = styled.button<{ $direction: 'prev' | 'next' }>`
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  transform: translateY(-50%);
+  ${(p) => (p.$direction === 'prev' ? 'left: 0;' : 'right: 0;')}
+
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: ${Colors.surface};
+  border: 1px solid ${Colors.border};
+  color: ${Colors.whiteFontColor};
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    background: ${Colors.surfaceStrong};
+    border-color: ${Colors.surfaceStrong};
+    transform: translateY(-50%) translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(-50%);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(30, 144, 255, 0.7);
+    outline-offset: 2px;
+  }
+
+  &::before {
+    content: ${(p) => (p.$direction === 'prev' ? "'‹'" : "'›'")};
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 40px;
+    height: 40px;
+
+    &::before {
+      font-size: 22px;
+    }
+  }
+`
+
+export const Pagination = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 export const Projects = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -53,7 +155,9 @@ export const StateButton = styled.button`
   color: ${Colors.whiteFontColor};
   font-weight: 800;
   cursor: pointer;
-  transition: transform 0.15s ease, background-color 0.2s ease;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease;
 
   &:hover {
     transform: translateY(-1px);

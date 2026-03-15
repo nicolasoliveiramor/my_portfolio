@@ -131,16 +131,17 @@ export const Hero = styled.section`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -40px;
-    height: 140px;
+    bottom: -90px;
+    height: 240px;
     background:
       radial-gradient(
-        900px 120px at 50% 10%,
-        rgba(255, 255, 255, 0.045),
+        1100px 220px at 50% 5%,
+        rgba(255, 255, 255, 0.01),
         transparent 70%
       ),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 65%);
-    opacity: 0.55;
+      radial-gradient(180deg, rgba(255, 255, 255, 0.01), transparent 70%);
+    opacity: 0.65;
+    filter: blur(6px);
     pointer-events: none;
   }
 `
@@ -156,25 +157,55 @@ export const Section = styled.section`
     left: 0;
     right: 0;
     top: -70px;
-    height: 140px;
+    height: 260px;
     background:
       radial-gradient(
-        900px 120px at 50% 60%,
-        rgba(255, 255, 255, 0.04),
+        1200px 220px at 50% 65%,
+        rgba(255, 255, 255, 0.035),
         transparent 72%
       ),
       linear-gradient(
         180deg,
         transparent,
-        rgba(255, 255, 255, 0.018),
+        rgba(255, 255, 255, 0.014),
         transparent
       );
-    opacity: 0.55;
+    opacity: 0.6;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -140px;
+    height: 240px;
+    background:
+      radial-gradient(
+        1200px 220px at 50% 35%,
+        rgba(255, 255, 255, 0.03),
+        transparent 72%
+      ),
+      linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.22), transparent);
+    opacity: 0.5;
+    filter: blur(6px);
     pointer-events: none;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
     padding: 72px 0;
+
+    &::before {
+      top: -120px;
+      height: 220px;
+    }
+
+    &::after {
+      bottom: -120px;
+      height: 220px;
+    }
   }
 `
 
@@ -306,7 +337,7 @@ export const HeroMedia = styled.div`
 
   img {
     width: 100%;
-    height: 420px;
+    height: 383.11px;
     object-fit: cover;
     border-radius: 18px;
     border: 1px solid ${Colors.border};
@@ -319,7 +350,7 @@ export const HeroMedia = styled.div`
     justify-self: start;
 
     img {
-      height: 360px;
+      height: 383.11px;
     }
   }
 `
@@ -400,11 +431,17 @@ export const AboutText = styled.div`
 `
 
 export const AboutHighlights = styled.div`
-  display: grid;
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: 12px;
 `
 
 export const HighlightCard = styled.div`
+  flex: 1 1 220px;
+  max-width: 320px;
   padding: 14px 14px;
   border-radius: 16px;
   background: ${Colors.surface};

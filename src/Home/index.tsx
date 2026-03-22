@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { MotionConfig, motion } from 'framer-motion'
 
 import { useGetPresentationQuery, useGetSkillsQuery } from '../services/api'
 
@@ -50,17 +50,15 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } }
 } as const
 
+const normalizeIconUrl = (url: string) => url.replace(/`/g, '').trim()
+
 export const Home = () => {
   const {
     data: presentationData,
     isLoading: presentationLoading,
     isError: presentationError
   } = useGetPresentationQuery()
-  const {
-    data: skillsData,
-    isLoading: skillsLoading,
-    isError: skillsError
-  } = useGetSkillsQuery()
+  const { data: skillsData } = useGetSkillsQuery()
 
   const scrollTo = (id: string) => {
     document
@@ -68,7 +66,7 @@ export const Home = () => {
       ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  if (presentationError || skillsError) {
+  if (presentationError) {
     return (
       <S.Page>
         <S.ErrorContainer className="container">
@@ -81,7 +79,7 @@ export const Home = () => {
     )
   }
 
-  if (presentationLoading || skillsLoading) {
+  if (presentationLoading) {
     return <Loader />
   }
 
@@ -94,242 +92,259 @@ export const Home = () => {
 
   const skills =
     skillsData?.items.flatMap((item) => item.technologies).filter(Boolean) ?? []
+  const skillColors = new Map(
+    (skillsData?.colors ?? []).map((color) => [color.id, color.hex])
+  )
 
   return (
-    <S.Page>
-      <S.Header>
-        <S.HeaderInner className="container">
-          <S.Brand href="#inicio">Nicolas Oliveira Mor</S.Brand>
-          <S.Nav>
-            <S.NavLink href="#sobre">Sobre</S.NavLink>
-            <S.NavLink href="#skills">Skills</S.NavLink>
-            <S.NavLink href="#projetos">Projetos</S.NavLink>
-            <S.NavLink href="#contato">Contato</S.NavLink>
-          </S.Nav>
-          <S.HeaderActions>
-            <S.OutlineLink
-              href="https://github.com/nicolasoliveiramor"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </S.OutlineLink>
-            <S.OutlineLink
-              href="https://www.linkedin.com/in/nicolasoliveiramor"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </S.OutlineLink>
-          </S.HeaderActions>
-        </S.HeaderInner>
-      </S.Header>
+    <MotionConfig reducedMotion="user">
+      <S.Page>
+        <S.SkipLink href="#main-content">
+          Pular para o conteúdo principal
+        </S.SkipLink>
+        <S.Header>
+          <S.HeaderInner className="container">
+            <S.Brand href="#inicio">Nicolas Oliveira Mor</S.Brand>
+            <S.Nav>
+              <S.NavLink href="#sobre">Sobre</S.NavLink>
+              <S.NavLink href="#skills">Skills</S.NavLink>
+              <S.NavLink href="#projetos">Projetos</S.NavLink>
+              <S.NavLink href="#contato">Contato</S.NavLink>
+            </S.Nav>
+            <S.HeaderActions>
+              <S.OutlineLink
+                href="https://github.com/nicolasoliveiramor"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </S.OutlineLink>
+              <S.OutlineLink
+                href="https://www.linkedin.com/in/nicolasoliveiramor"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </S.OutlineLink>
+            </S.HeaderActions>
+          </S.HeaderInner>
+        </S.Header>
 
-      <main>
-        <S.Hero id="inicio">
-          <S.SectionInner className="container">
-            <S.HeroGrid>
-              <S.HeroText>
-                <motion.div
-                  variants={stagger}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <motion.div variants={fadeDown}>
-                    <S.Kicker>Portfolio</S.Kicker>
+        <main id="main-content">
+          <S.Hero id="inicio">
+            <S.SectionInner className="container">
+              <S.HeroGrid>
+                <S.HeroText>
+                  <motion.div
+                    variants={stagger}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <motion.div variants={fadeDown}>
+                      <S.Kicker>Portfolio</S.Kicker>
+                    </motion.div>
+                    <motion.h1 variants={slideRight}>{heroTitle}</motion.h1>
+                    <motion.p variants={slideRight}>{heroDescription}</motion.p>
+                    <motion.div variants={fadeUp}>
+                      <S.HeroActions>
+                        <S.PrimaryButton
+                          type="button"
+                          onClick={() => {
+                            scrollTo('projetos')
+                          }}
+                        >
+                          Ver projetos
+                        </S.PrimaryButton>
+                        <S.SecondaryButton
+                          type="button"
+                          onClick={() => {
+                            scrollTo('contato')
+                          }}
+                        >
+                          Falar comigo
+                        </S.SecondaryButton>
+                      </S.HeroActions>
+                    </motion.div>
                   </motion.div>
-                  <motion.h1 variants={slideLeft}>{heroTitle}</motion.h1>
-                  <motion.p variants={slideLeft}>{heroDescription}</motion.p>
-                  <motion.div variants={fadeUp}>
-                    <S.HeroActions>
-                      <S.PrimaryButton
-                        type="button"
-                        onClick={() => {
-                          scrollTo('projetos')
-                        }}
-                      >
-                        Ver projetos
-                      </S.PrimaryButton>
-                      <S.SecondaryButton
-                        type="button"
-                        onClick={() => {
-                          scrollTo('contato')
-                        }}
-                      >
-                        Falar comigo
-                      </S.SecondaryButton>
-                    </S.HeroActions>
+                </S.HeroText>
+
+                <S.HeroMedia>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.85, ease: 'easeOut' }}
+                  >
+                    {heroImage ? (
+                      <img src={heroImage} alt="Imagem do Perfil" />
+                    ) : (
+                      <S.ImagePlaceholder aria-hidden="true" />
+                    )}
                   </motion.div>
-                </motion.div>
-              </S.HeroText>
+                </S.HeroMedia>
+              </S.HeroGrid>
+            </S.SectionInner>
+          </S.Hero>
 
-              <S.HeroMedia>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.85, ease: 'easeOut' }}
-                >
-                  {heroImage ? (
-                    <img src={heroImage} alt="Imagem do Perfil" />
-                  ) : (
-                    <S.ImagePlaceholder aria-hidden="true" />
-                  )}
-                </motion.div>
-              </S.HeroMedia>
-            </S.HeroGrid>
-          </S.SectionInner>
-        </S.Hero>
+          <S.Section id="sobre">
+            <S.SectionInner className="container">
+              <motion.div
+                variants={slideLeft}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              ></motion.div>
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.AboutHighlights style={{ justifyContent: 'center' }}>
+                  <S.HighlightCard>
+                    <h3>Foco</h3>
+                    <p>Front-end e experiência do usuário.</p>
+                  </S.HighlightCard>
+                  <S.HighlightCard>
+                    <h3>Qualidade</h3>
+                    <p>Performance, acessibilidade e consistência visual.</p>
+                  </S.HighlightCard>
+                  <S.HighlightCard>
+                    <h3>Entrega</h3>
+                    <p>Projetos com boa arquitetura e manutenção fácil.</p>
+                  </S.HighlightCard>
+                </S.AboutHighlights>
+              </motion.div>
+            </S.SectionInner>
+          </S.Section>
 
-        <S.Section id="sobre">
-          <S.SectionInner className="container">
-            <motion.div
-              variants={slideLeft}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-            </motion.div>
-            <motion.div
-              variants={slideRight}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <S.AboutHighlights style={{ justifyContent: 'center' }}>
-                <S.HighlightCard>
-                  <h3>Foco</h3>
-                  <p>Front-end e experiência do usuário.</p>
-                </S.HighlightCard>
-                <S.HighlightCard>
-                  <h3>Qualidade</h3>
-                  <p>Performance, acessibilidade e consistência visual.</p>
-                </S.HighlightCard>
-                <S.HighlightCard>
-                  <h3>Entrega</h3>
-                  <p>Projetos com boa arquitetura e manutenção fácil.</p>
-                </S.HighlightCard>
-              </S.AboutHighlights>
-            </motion.div>
-          </S.SectionInner>
-        </S.Section>
+          <S.Section id="skills">
+            <S.SectionInner className="container">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.SectionHeader>
+                  <h2>{skillsData?.sectionTitle ?? 'Skills'}</h2>
+                  <p>Tecnologias e ferramentas que uso no dia a dia.</p>
+                </S.SectionHeader>
+              </motion.div>
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.SkillsGrid>
+                  {skills.map((tech) => (
+                    <S.SkillPill
+                      key={tech.id}
+                      $accentColor={skillColors.get(tech.colorId)}
+                    >
+                      <S.SkillIcon
+                        role="img"
+                        aria-label={tech.name}
+                        $iconUrl={normalizeIconUrl(tech.iconUrl)}
+                        $accentColor={skillColors.get(tech.colorId)}
+                      />
+                    </S.SkillPill>
+                  ))}
+                </S.SkillsGrid>
+              </motion.div>
+            </S.SectionInner>
+          </S.Section>
 
-        <S.Section id="skills">
-          <S.SectionInner className="container">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <S.SectionHeader>
-                <h2>{skillsData?.sectionTitle ?? 'Skills'}</h2>
-                <p>Tecnologias e ferramentas que uso no dia a dia.</p>
-              </S.SectionHeader>
-            </motion.div>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <S.SkillsGrid>
-                {skills.map((tech) => (
-                  <S.SkillPill key={tech}>{tech}</S.SkillPill>
-                ))}
-              </S.SkillsGrid>
-            </motion.div>
-          </S.SectionInner>
-        </S.Section>
+          <S.Section id="projetos">
+            <S.SectionInner className="container">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.SectionHeader>
+                  <h2>Projetos</h2>
+                  <p>Arraste para o lado para ver meus trabalhos recentes.</p>
+                </S.SectionHeader>
+              </motion.div>
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.ProjectsWrap>
+                  <CardContainer />
+                </S.ProjectsWrap>
+              </motion.div>
+            </S.SectionInner>
+          </S.Section>
 
-        <S.Section id="projetos">
-          <S.SectionInner className="container">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <S.SectionHeader>
-                <h2>Projetos</h2>
-                <p>Arraste para o lado para ver meus trabalhos recentes.</p>
-              </S.SectionHeader>
-            </motion.div>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <S.ProjectsWrap>
-                <CardContainer />
-              </S.ProjectsWrap>
-            </motion.div>
-          </S.SectionInner>
-        </S.Section>
+          <S.Section id="contato">
+            <S.SectionInner className="container">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.SectionHeader>
+                  <h2>Contato</h2>
+                  <p>Vamos conversar? Escolha um canal abaixo.</p>
+                </S.SectionHeader>
+              </motion.div>
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+              >
+                <S.ContactGrid>
+                  <S.ContactCard
+                    href="https://www.linkedin.com/in/nicolasoliveiramor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3>LinkedIn</h3>
+                    <p>Mensagem direta e networking.</p>
+                  </S.ContactCard>
+                  <S.ContactCard
+                    href="https://github.com/nicolasoliveiramor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3>GitHub</h3>
+                    <p>Repositórios, contribuições e código.</p>
+                  </S.ContactCard>
+                  <S.ContactCard
+                    href="https://wa.me/5511933961754"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h3>WhatsApp</h3>
+                    <p>Me chame no WhatsApp</p>
+                  </S.ContactCard>
+                </S.ContactGrid>
+              </motion.div>
+            </S.SectionInner>
+          </S.Section>
+        </main>
 
-        <S.Section id="contato">
-          <S.SectionInner className="container">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
+        <S.Footer>
+          <S.FooterInner className="container">
+            <p>© {new Date().getFullYear()} Nicolas Oliveira Mor</p>
+            <S.BackToTop
+              type="button"
+              onClick={() => {
+                scrollTo('inicio')
+              }}
             >
-              <S.SectionHeader>
-                <h2>Contato</h2>
-                <p>Vamos conversar? Escolha um canal abaixo.</p>
-              </S.SectionHeader>
-            </motion.div>
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-            >
-              <S.ContactGrid>
-                <S.ContactCard
-                  href="https://www.linkedin.com/in/nicolasoliveiramor"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h3>LinkedIn</h3>
-                  <p>Mensagem direta e networking.</p>
-                </S.ContactCard>
-                <S.ContactCard
-                  href="https://github.com/nicolasoliveiramor"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h3>GitHub</h3>
-                  <p>Repositórios, contribuições e código.</p>
-                </S.ContactCard>
-                <S.ContactCard
-                  href="https://wa.me/5511933961754"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h3>WhatsApp</h3>
-                  <p>Me chame no WhatsApp</p>
-                </S.ContactCard>
-              </S.ContactGrid>
-            </motion.div>
-          </S.SectionInner>
-        </S.Section>
-      </main>
-
-      <S.Footer>
-        <S.FooterInner className="container">
-          <p>© {new Date().getFullYear()} Nicolas Oliveira Mor</p>
-          <S.BackToTop
-            type="button"
-            onClick={() => {
-              scrollTo('inicio')
-            }}
-          >
-            Voltar ao topo
-          </S.BackToTop>
-        </S.FooterInner>
-      </S.Footer>
-    </S.Page>
+              Voltar ao topo
+            </S.BackToTop>
+          </S.FooterInner>
+        </S.Footer>
+      </S.Page>
+    </MotionConfig>
   )
 }

@@ -48,6 +48,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     line-height: 1.5;
     color: ${Colors.whiteFontColor};
+    overflow-x: hidden;
     background:
       linear-gradient(
         180deg,
@@ -93,5 +94,17 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 24px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    .container {
+      padding: 0 16px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    .container {
+      padding: 0 12px;
+    }
   }
 `

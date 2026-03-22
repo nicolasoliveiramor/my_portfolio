@@ -69,7 +69,7 @@ export const CardContainer = () => {
 
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={24}
+          spaceBetween={18}
           slidesPerView={1}
           speed={650}
           grabCursor
@@ -81,8 +81,8 @@ export const CardContainer = () => {
             pauseOnMouseEnter: true
           }}
           breakpoints={{
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }
+            768: { slidesPerView: 1, spaceBetween: 18 },
+            1024: { slidesPerView: 2, spaceBetween: 24 }
           }}
         >
           {projects.map((project) => (

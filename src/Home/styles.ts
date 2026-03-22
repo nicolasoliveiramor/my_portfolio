@@ -1,7 +1,29 @@
 import { css, styled } from 'styled-components'
 import { breakpoints, Colors } from '../styles'
 
+const hexToRgba = (hex: string, alpha: number) => {
+  const normalized = hex.replace('#', '')
+  const isShort = normalized.length === 3
+  const fullHex = isShort
+    ? normalized
+        .split('')
+        .map((char) => `${char}${char}`)
+        .join('')
+    : normalized
+  const value = Number.parseInt(fullHex, 16)
+
+  if (Number.isNaN(value)) {
+    return `rgba(255, 255, 255, ${alpha})`
+  }
+
+  const r = (value >> 16) & 255
+  const g = (value >> 8) & 255
+  const b = value & 255
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`
+}
+
 const floatingPanel = css`
+  width: auto;
   background: rgba(17, 18, 22, 0.55);
   border: 1px solid ${Colors.border};
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.45);
@@ -10,6 +32,26 @@ const floatingPanel = css`
 
 export const Page = styled.div`
   min-height: 100svh;
+`
+
+export const SkipLink = styled.a`
+  position: absolute;
+  left: 16px;
+  top: -48px;
+  z-index: 120;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: ${Colors.blueButtonColor};
+  color: ${Colors.whiteFontColor};
+  font-weight: 700;
+  transition: top 0.2s ease;
+
+  &:focus-visible {
+    top: 12px;
+    outline: 2px solid rgba(30, 144, 255, 0.7);
+    outline-offset: 2px;
+  }
 `
 
 export const Header = styled.header`
@@ -27,13 +69,42 @@ export const HeaderInner = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+
+  @media (max-width: 960px) {
+    height: auto;
+    min-height: 72px;
+    padding: 10px 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    justify-content: center;
+  }
 `
 
 export const Brand = styled.a`
   font-weight: 800;
+  padding-left: 12px;
   letter-spacing: -0.02em;
   font-size: 1rem;
   white-space: nowrap;
+
+  @media (max-width: 960px) {
+    order: 1;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+    text-align: center;
+    white-space: normal;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 0.9rem;
+  }
 `
 
 export const Nav = styled.nav`
@@ -41,15 +112,26 @@ export const Nav = styled.nav`
   align-items: center;
   gap: 6px;
 
-  @media (max-width: ${breakpoints.tablet}) {
-    display: none;
+  @media (max-width: 960px) {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `
 
 export const NavLink = styled.a`
+  min-height: 44px;
   padding: 10px 12px;
   border-radius: 10px;
   color: ${Colors.textMuted};
+  white-space: nowrap;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
@@ -69,13 +151,24 @@ export const HeaderActions = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  padding-right: 12px;
+
+  @media (max-width: 960px) {
+    order: 2;
+    margin-left: auto;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+    justify-content: center;
+  }
 `
 
 export const OutlineLink = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 44px;
   padding: 0 12px;
   border-radius: 12px;
   border: 1px solid ${Colors.border};
@@ -95,13 +188,25 @@ export const OutlineLink = styled.a`
     outline: 2px solid rgba(30, 144, 255, 0.7);
     outline-offset: 2px;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 44px;
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 320px) {
+    height: 42px;
+    padding: 0 9px;
+    font-size: 0.85rem;
+  }
 `
 
 export const GhostLink = styled.a`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
+  height: 44px;
   padding: 0 12px;
   border-radius: 12px;
   color: ${Colors.textMuted};
@@ -119,12 +224,27 @@ export const GhostLink = styled.a`
     outline: 2px solid rgba(30, 144, 255, 0.7);
     outline-offset: 2px;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 44px;
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 320px) {
+    height: 42px;
+    padding: 0 9px;
+    font-size: 0.85rem;
+  }
 `
 
 export const Hero = styled.section`
   scroll-margin-top: 90px;
   padding: 72px 0 48px;
-  position: relative;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 56px 0 36px;
+  }
 
   &::after {
     content: '';
@@ -207,6 +327,10 @@ export const Section = styled.section`
       height: 220px;
     }
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 56px 0;
+  }
 `
 
 export const SectionInner = styled.div`
@@ -220,9 +344,13 @@ export const HeroGrid = styled.div`
   align-items: center;
   gap: 48px;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media (max-width: 960px) {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    gap: 18px;
   }
 `
 
@@ -233,8 +361,8 @@ export const HeroText = styled.div`
 
   h1 {
     margin: 10px 0 10px;
-    font-size: 3rem;
-    line-height: 1.05;
+    font-size: clamp(2rem, 2.2vw, 3rem);
+    line-height: clamp(1.06, 1.7vw, 1.15);
     letter-spacing: -0.035em;
   }
 
@@ -242,15 +370,12 @@ export const HeroText = styled.div`
     margin: 0;
     max-width: 60ch;
     color: ${Colors.textMuted};
-    font-size: 1.05rem;
+    font-size: clamp(1rem, 2vw, 1.05rem);
+    line-height: 1.6;
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media (max-width: 960px) {
     padding: 16px 16px;
-
-    h1 {
-      font-size: 2.25rem;
-    }
   }
 `
 
@@ -272,10 +397,15 @@ export const HeroActions = styled.div`
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `
 
 export const PrimaryButton = styled.button`
-  height: 46px;
+  min-height: 46px;
   padding: 0 16px;
   border-radius: 14px;
   border: 1px solid rgba(30, 144, 255, 0.28);
@@ -300,10 +430,18 @@ export const PrimaryButton = styled.button`
     outline: 2px solid rgba(30, 144, 255, 0.7);
     outline-offset: 2px;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+  }
+
+  @media (max-width: ${breakpoints.small}) {
+    min-height: 54px;
+  }
 `
 
 export const SecondaryButton = styled.button`
-  height: 46px;
+  min-height: 46px;
   padding: 0 16px;
   border-radius: 14px;
   border: 1px solid ${Colors.border};
@@ -328,16 +466,25 @@ export const SecondaryButton = styled.button`
     outline: 2px solid rgba(30, 144, 255, 0.7);
     outline-offset: 2px;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+  }
+
+  @media (max-width: ${breakpoints.small}) {
+    min-height: 54px;
+  }
 `
 
 export const HeroMedia = styled.div`
   width: 100%;
   max-width: 420px;
-  justify-self: end;
+  justify-self: start;
 
   img {
     width: 100%;
-    height: 383.11px;
+    max-height: 383px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 18px;
     border: 1px solid ${Colors.border};
@@ -345,12 +492,31 @@ export const HeroMedia = styled.div`
     background: ${Colors.surface};
   }
 
-  @media (max-width: ${breakpoints.tablet}) {
-    max-width: 380px;
-    justify-self: start;
+  @media (max-width: 960px) {
+    max-width: 400px;
+    justify-self: center;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    max-width: 320px;
+    justify-self: center;
 
     img {
-      height: 383.11px;
+      max-height: 320px;
+    }
+  }
+
+  @media (max-width: 320px) {
+    max-width: 296px;
+
+    img {
+      max-height: 296px;
+    }
+  }
+
+  @media (orientation: landscape) and (max-width: 1024px) {
+    img {
+      max-height: 320px;
     }
   }
 `
@@ -437,6 +603,11 @@ export const AboutHighlights = styled.div`
   justify-content: center;
   align-items: stretch;
   gap: 12px;
+
+  @media (max-width: 320px) {
+    margin-top: 18px;
+    gap: 10px;
+  }
 `
 
 export const HighlightCard = styled.div`
@@ -463,18 +634,61 @@ export const SkillsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+
+  @media (max-width: 320px) {
+    justify-content: center;
+  }
 `
 
-export const SkillPill = styled.span`
+export const SkillPill = styled.span<{ $accentColor?: string }>`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  min-height: 72px;
   padding: 10px 12px;
-  border-radius: 999px;
-  background: ${Colors.surface};
-  border: 1px solid ${Colors.border};
+  border-radius: 16px;
+  background: ${(p) =>
+    p.$accentColor
+      ? `linear-gradient(180deg, ${hexToRgba(p.$accentColor, 0.18)}, ${Colors.surface})`
+      : Colors.surface};
+  border: 1px solid
+    ${(p) => (p.$accentColor ? hexToRgba(p.$accentColor, 0.55) : Colors.border)};
   color: ${Colors.whiteFontColor};
   font-weight: 700;
   font-size: 0.95rem;
+  transition:
+    transform 0.18s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px
+      ${(p) =>
+        p.$accentColor
+          ? hexToRgba(p.$accentColor, 0.28)
+          : 'rgba(0, 0, 0, 0.2)'};
+  }
+`
+
+export const SkillIcon = styled.span<{
+  $iconUrl: string
+  $accentColor?: string
+}>`
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-color: ${(p) => p.$accentColor ?? Colors.whiteFontColor};
+  border-radius: 8px;
+  -webkit-mask-image: ${(p) => `url("${p.$iconUrl}")`};
+  mask-image: ${(p) => `url("${p.$iconUrl}")`};
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 `
 
 export const FilterBar = styled.div`

@@ -35,6 +35,14 @@ export const CarouselFrame = styled.div`
   @media (max-width: ${breakpoints.tablet}) {
     padding: 0 48px 36px;
   }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 0 16px 34px;
+  }
+
+  @media (max-width: ${breakpoints.small}) {
+    padding: 0 12px 32px;
+  }
 `
 
 export const NavButton = styled.button<{ $direction: 'prev' | 'next' }>`
@@ -90,6 +98,10 @@ export const NavButton = styled.button<{ $direction: 'prev' | 'next' }>`
     &::before {
       font-size: 22px;
     }
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    display: none;
   }
 `
 

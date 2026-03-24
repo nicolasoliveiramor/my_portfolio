@@ -93,7 +93,7 @@ export const Home = () => {
   const skills =
     skillsData?.items.flatMap((item) => item.technologies).filter(Boolean) ?? []
   const skillColors = new Map(
-    (skillsData?.colors ?? []).map((color) => [color.id, color.hex])
+    (skillsData?.colors ?? []).map((color) => [color.id, color.hex ?? ''])
   )
 
   return (

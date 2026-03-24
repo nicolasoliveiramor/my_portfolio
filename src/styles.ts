@@ -15,10 +15,13 @@ export const Colors = {
 
 export const breakpoints = {
   laptop: '1445px',
+  md: '960px',
   desktop: '1025px',
+  tabletLandscape: '1024px',
   tablet: '769px',
   mobile: '450px',
-  small: '325px'
+  small: '325px',
+  xs: '320px'
 }
 
 export const heights = {
@@ -102,7 +105,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: ${breakpoints.xs}) {
     .container {
       padding: 0 12px;
     }

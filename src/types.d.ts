@@ -12,7 +12,7 @@ declare interface Iskills {
   colors: {
     id: number
     name: string
-    hex: string
+    hex?: string
   }[]
   items: {
     id: number

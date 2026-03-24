@@ -1,33 +1,67 @@
 import { css, styled } from 'styled-components'
 import { breakpoints, Colors } from '../styles'
 
-const hexToRgba = (hex: string, alpha: number) => {
-  const normalized = hex.replace('#', '')
-  const isShort = normalized.length === 3
-  const fullHex = isShort
-    ? normalized
-        .split('')
-        .map((char) => `${char}${char}`)
-        .join('')
-    : normalized
-  const value = Number.parseInt(fullHex, 16)
-
-  if (Number.isNaN(value)) {
-    return `rgba(255, 255, 255, ${alpha})`
-  }
-
-  const r = (value >> 16) & 255
-  const g = (value >> 8) & 255
-  const b = value & 255
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`
-}
-
 const floatingPanel = css`
   width: auto;
   background: rgba(17, 18, 22, 0.55);
   border: 1px solid ${Colors.border};
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(12px);
+`
+
+const focusVisibleRing = css`
+  &:focus-visible {
+    outline: 2px solid rgba(30, 144, 255, 0.7);
+    outline-offset: 2px;
+  }
+`
+
+const actionLinkBase = css`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-weight: 700;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 44px;
+    padding: 0 10px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: ${breakpoints.xs}) {
+    height: 42px;
+    padding: 0 9px;
+    font-size: 0.85rem;
+  }
+`
+
+const actionButtonBase = css`
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 14px;
+  color: ${Colors.whiteFontColor};
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background-color 0.2s ease;
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  ${focusVisibleRing}
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+  }
+
+  @media (max-width: ${breakpoints.small}) {
+    min-height: 54px;
+  }
 `
 
 export const Page = styled.div`
@@ -70,7 +104,7 @@ export const HeaderInner = styled.div`
   justify-content: space-between;
   gap: 16px;
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     height: auto;
     min-height: 72px;
     padding: 10px 0;
@@ -91,7 +125,7 @@ export const Brand = styled.a`
   font-size: 1rem;
   white-space: nowrap;
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     order: 1;
   }
 
@@ -102,7 +136,7 @@ export const Brand = styled.a`
     font-size: 0.95rem;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: ${breakpoints.xs}) {
     font-size: 0.9rem;
   }
 `
@@ -112,7 +146,7 @@ export const Nav = styled.nav`
   align-items: center;
   gap: 6px;
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     order: 3;
     width: 100%;
     justify-content: center;
@@ -141,10 +175,7 @@ export const NavLink = styled.a`
     color: ${Colors.whiteFontColor};
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
+  ${focusVisibleRing}
 `
 
 export const HeaderActions = styled.div`
@@ -153,7 +184,7 @@ export const HeaderActions = styled.div`
   gap: 8px;
   padding-right: 12px;
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     order: 2;
     margin-left: auto;
   }
@@ -165,16 +196,10 @@ export const HeaderActions = styled.div`
 `
 
 export const OutlineLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  padding: 0 12px;
-  border-radius: 12px;
+  ${actionLinkBase}
   border: 1px solid ${Colors.border};
   background: transparent;
   color: ${Colors.whiteFontColor};
-  font-weight: 700;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -184,33 +209,12 @@ export const OutlineLink = styled.a`
     border-color: ${Colors.surfaceStrong};
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    height: 44px;
-    padding: 0 10px;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 320px) {
-    height: 42px;
-    padding: 0 9px;
-    font-size: 0.85rem;
-  }
+  ${focusVisibleRing}
 `
 
 export const GhostLink = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  padding: 0 12px;
-  border-radius: 12px;
+  ${actionLinkBase}
   color: ${Colors.textMuted};
-  font-weight: 700;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
@@ -220,22 +224,7 @@ export const GhostLink = styled.a`
     color: ${Colors.whiteFontColor};
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    height: 44px;
-    padding: 0 10px;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 320px) {
-    height: 42px;
-    padding: 0 9px;
-    font-size: 0.85rem;
-  }
+  ${focusVisibleRing}
 `
 
 export const Hero = styled.section`
@@ -344,7 +333,7 @@ export const HeroGrid = styled.div`
   align-items: center;
   gap: 48px;
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     grid-template-columns: 1fr;
     gap: 28px;
   }
@@ -374,7 +363,7 @@ export const HeroText = styled.div`
     line-height: 1.6;
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     padding: 16px 16px;
   }
 `
@@ -405,74 +394,24 @@ export const HeroActions = styled.div`
 `
 
 export const PrimaryButton = styled.button`
-  min-height: 46px;
-  padding: 0 16px;
-  border-radius: 14px;
+  ${actionButtonBase}
   border: 1px solid rgba(30, 144, 255, 0.28);
   background: ${Colors.blueButtonColor};
-  color: ${Colors.whiteFontColor};
-  font-weight: 800;
-  cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    background-color 0.2s ease;
 
   &:hover {
     background: ${Colors.blueButtonHover};
     transform: translateY(-1px);
   }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    width: 100%;
-  }
-
-  @media (max-width: ${breakpoints.small}) {
-    min-height: 54px;
-  }
 `
 
 export const SecondaryButton = styled.button`
-  min-height: 46px;
-  padding: 0 16px;
-  border-radius: 14px;
+  ${actionButtonBase}
   border: 1px solid ${Colors.border};
   background: ${Colors.surface};
-  color: ${Colors.whiteFontColor};
-  font-weight: 800;
-  cursor: pointer;
-  transition:
-    transform 0.15s ease,
-    background-color 0.2s ease;
 
   &:hover {
     background: ${Colors.surfaceStrong};
     transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
-
-  @media (max-width: ${breakpoints.mobile}) {
-    width: 100%;
-  }
-
-  @media (max-width: ${breakpoints.small}) {
-    min-height: 54px;
   }
 `
 
@@ -492,7 +431,7 @@ export const HeroMedia = styled.div`
     background: ${Colors.surface};
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: ${breakpoints.md}) {
     max-width: 400px;
     justify-self: center;
   }
@@ -506,7 +445,7 @@ export const HeroMedia = styled.div`
     }
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: ${breakpoints.xs}) {
     max-width: 296px;
 
     img {
@@ -514,7 +453,7 @@ export const HeroMedia = styled.div`
     }
   }
 
-  @media (orientation: landscape) and (max-width: 1024px) {
+  @media (orientation: landscape) and (max-width: ${breakpoints.tabletLandscape}) {
     img {
       max-height: 320px;
     }
@@ -604,7 +543,7 @@ export const AboutHighlights = styled.div`
   align-items: stretch;
   gap: 12px;
 
-  @media (max-width: 320px) {
+  @media (max-width: ${breakpoints.xs}) {
     margin-top: 18px;
     gap: 10px;
   }
@@ -635,7 +574,7 @@ export const SkillsGrid = styled.div`
   flex-wrap: wrap;
   gap: 10px;
 
-  @media (max-width: 320px) {
+  @media (max-width: ${breakpoints.xs}) {
     justify-content: center;
   }
 `
@@ -648,12 +587,16 @@ export const SkillPill = styled.span<{ $accentColor?: string }>`
   min-height: 72px;
   padding: 10px 12px;
   border-radius: 16px;
+  background: ${Colors.surface};
   background: ${(p) =>
     p.$accentColor
-      ? `linear-gradient(180deg, ${hexToRgba(p.$accentColor, 0.18)}, ${Colors.surface})`
+      ? `linear-gradient(180deg, color-mix(in srgb, ${p.$accentColor} 24%, transparent), ${Colors.surface})`
       : Colors.surface};
-  border: 1px solid
-    ${(p) => (p.$accentColor ? hexToRgba(p.$accentColor, 0.55) : Colors.border)};
+  border: 1px solid ${Colors.border};
+  border-color: ${(p) =>
+    p.$accentColor
+      ? `color-mix(in srgb, ${p.$accentColor} 70%, ${Colors.border})`
+      : Colors.border};
   color: ${Colors.whiteFontColor};
   font-weight: 700;
   font-size: 0.95rem;
@@ -664,10 +607,11 @@ export const SkillPill = styled.span<{ $accentColor?: string }>`
 
   &:hover {
     transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     box-shadow: 0 8px 20px
       ${(p) =>
         p.$accentColor
-          ? hexToRgba(p.$accentColor, 0.28)
+          ? `color-mix(in srgb, ${p.$accentColor} 36%, transparent)`
           : 'rgba(0, 0, 0, 0.2)'};
   }
 `
@@ -678,9 +622,9 @@ export const SkillIcon = styled.span<{
 }>`
   width: 50px;
   height: 50px;
+  border-radius: 4px;
   display: inline-block;
   background-color: ${(p) => p.$accentColor ?? Colors.whiteFontColor};
-  border-radius: 8px;
   -webkit-mask-image: ${(p) => `url("${p.$iconUrl}")`};
   mask-image: ${(p) => `url("${p.$iconUrl}")`};
   -webkit-mask-position: center;
@@ -728,10 +672,7 @@ export const FilterButton = styled.button<{ $active?: boolean }>`
     transform: translateY(0);
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
+  ${focusVisibleRing}
 `
 
 export const ProjectsWrap = styled.div`
@@ -765,10 +706,7 @@ export const ContactCard = styled.a`
     border-color: ${Colors.surfaceStrong};
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
+  ${focusVisibleRing}
 
   h3 {
     margin: 0 0 6px;
@@ -819,10 +757,7 @@ export const BackToTop = styled.button`
     background: ${Colors.surfaceStrong};
   }
 
-  &:focus-visible {
-    outline: 2px solid rgba(30, 144, 255, 0.7);
-    outline-offset: 2px;
-  }
+  ${focusVisibleRing}
 `
 
 export const ErrorContainer = styled.div`

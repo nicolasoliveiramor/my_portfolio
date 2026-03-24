@@ -126,11 +126,13 @@ export const Brand = styled.a`
 
   @media (max-width: ${breakpoints.md}) {
     order: 1;
+    padding-left: 8px;
   }
 
   @media (max-width: ${breakpoints.mobile}) {
     width: 100%;
     text-align: center;
+    padding-left: 0px;
     white-space: normal;
     font-size: 0.95rem;
   }
@@ -184,12 +186,14 @@ export const HeaderActions = styled.div`
 
   @media (max-width: ${breakpoints.md}) {
     order: 2;
+    padding-right: 8px;
     margin-left: auto;
   }
 
   @media (max-width: ${breakpoints.mobile}) {
     width: 100%;
     justify-content: center;
+    padding-right: 0px;
   }
 `
 

@@ -120,7 +120,6 @@ export const HeaderInner = styled.div`
 
 export const Brand = styled.a`
   font-weight: 800;
-  padding-left: 12px;
   letter-spacing: -0.02em;
   font-size: 1rem;
   white-space: nowrap;
@@ -182,7 +181,6 @@ export const HeaderActions = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-right: 12px;
 
   @media (max-width: ${breakpoints.md}) {
     order: 2;
